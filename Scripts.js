@@ -93,13 +93,15 @@ function FindSeries(id, color){
     //--------------------------------------------axis2----------------------------------------------
 
     if(center % 7 == 0){
-        start = center - 6;
-        end = center;
+        start = 7;
+        end = 49;
     }else{
-        start = ceil(center / 7);
-        end = center - (center % 7 - 1) + 42;
+        start = Math.ceil(center % 7);
+        end = Math.ceil(center % 7) + 42;
     }
-    
+    console.log(start);
+    console.log(end)
+
     //--------------------------------------------result---------------------------------------------
 
     if(kill.length >= 4){
