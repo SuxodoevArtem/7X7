@@ -59,6 +59,7 @@ function FindSeries(id, color){
     let center = id.split('').slice(3).join('');
 
     //--------------------------------------------axis1---------------------------------------------
+
     let start;
     let end; 
     if(center % 7 == 0){
@@ -69,26 +70,19 @@ function FindSeries(id, color){
         end = center - (center % 7 - 1) + 6;
     }
     
-    //Поиск элементов
+    //Проверка элементов
     for(let i = start; i <= end; i++){ 
-        if($(`#Rec${i}`).css("background-color") == CenterColor || i == center)
-        axis1.push(`#Rec${i}`)
-    }
-    if(axis1.length >= 4){
-
-        if(axis1[1].split('').slice(4).join('') - axis1[0].split('').slice(4).join('') > 1){
+        if($(`#Rec${i}`).css("background-color") == CenterColor){
+            axis1.push(`#Rec${i}`)
+        }
+        if($(`#Rec${i}`).css("background-color") != CenterColor && axis1.length < 4){
             axis1.shift();
         }
-        if(axis1[axis1.length - 1].split('').slice(4).join('') - axis1[axis1.length - 2].split('').slice(4).join('') > 1){
-            axis1.pop();
-        }
-
-        axis1.map(item => kill.push(item));
     }
-    
-    console.log(kill); 
-    
-    //if(axis1.length >= 4 && )
+
+    if(axis1.length >= 4) kill.push(axis1); 
+
+    console.log(axis1)
     
     //--------------------------------------------axis2----------------------------------------------
 
@@ -99,8 +93,19 @@ function FindSeries(id, color){
         start = Math.ceil(center % 7);
         end = Math.ceil(center % 7) + 42;
     }
-    console.log(start);
-    console.log(end)
+
+    //Проверка элементов
+    for(let i = start; i <= end; i += 7){ 
+        if($(`#Rec${i}`).css("background-color") == CenterColor){
+            axis2.push(`#Rec${i}`)
+        }
+        if($(`#Rec${i}`).css("background-color") != CenterColor && axis2.length < 4){
+            axis2.shift()
+        }
+    }
+    if(axis2.length >= 4) kill.push(axis2); 
+
+    console.log(axis2)
 
     //--------------------------------------------result---------------------------------------------
 
